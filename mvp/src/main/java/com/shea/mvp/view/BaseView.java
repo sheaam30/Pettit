@@ -38,6 +38,13 @@ abstract public class BaseView<T extends BasePresenterInterface> {
         activity = null;
     }
 
+    public T getPresenter() {
+        if (presenter != null) {
+            return presenter;
+        }
+        throw new IllegalStateException("Presenter Not Attached");
+    }
+
     protected final void setSupportActionbar(Toolbar toolbar) {
         activity.setSupportActionBar(toolbar);
     }

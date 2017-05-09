@@ -2,9 +2,19 @@ package willowtree.com.sample;
 
 import com.shea.mvp.interactor.BaseInteractor;
 
-/**
- * Created by adamshea on 5/8/17.
- */
+import io.reactivex.Observable;
 
 public class MainInteractor extends BaseInteractor {
+    private Model model;
+
+    public MainInteractor() {
+        super();
+        model = new Model();
+    }
+
+    public Observable<String> switchText(String oldText) {
+        String newText = model.getNextString();
+        model.setText(oldText);
+        return Observable.just(newText);
+    }
 }
