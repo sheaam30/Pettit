@@ -11,12 +11,12 @@ import com.shea.mvp.view.BaseView
 
 abstract class BasePresenter<I : BaseInteractor, V : BaseView<*>>(protected var interactor: I, protected var view: V) : LifecycleObserver {
 
-    fun setupViews(savedInstanceState: Bundle) {
+    fun setupViews(savedInstanceState: Bundle?) {
         view.setupViews(savedInstanceState)
         onSetupViews(savedInstanceState)
     }
 
-    open fun onSetupViews(savedInstanceState: Bundle) { /*Override*/
+    open fun onSetupViews(savedInstanceState: Bundle?) { /*Override*/
     }
 
 

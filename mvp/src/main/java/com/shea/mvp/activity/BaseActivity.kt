@@ -8,19 +8,19 @@ import com.shea.mvp.presenter.BasePresenter
 
 abstract class BaseActivity<T : BasePresenter<*, *>> : AppCompatLifecycleActivity() {
 
-    protected var presenter: T? = null
+    protected lateinit var presenter: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
         createPresenter(savedInstanceState)
-        presenter!!.setupViews(savedInstanceState!!)
+        presenter.setupViews(savedInstanceState)
         lifecycle.addObserver(presenter)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        presenter!!.onSaveState(outState)
+        presenter.onSaveState(outState)
     }
 
     protected abstract fun createPresenter(restoredBundle: Bundle?)
