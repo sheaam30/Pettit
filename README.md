@@ -1,4 +1,3 @@
 # Pettit
-MVP Library named after the first NBA MVP award winner Bob Pettit.
-
+MVP Library to make spinning up new projects and prototyping quick and easy
 TODO
