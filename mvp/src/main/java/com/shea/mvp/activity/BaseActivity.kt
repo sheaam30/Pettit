@@ -11,6 +11,7 @@ abstract class BaseActivity<T : BasePresenter<*, *>> : AppCompatLifecycleActivit
     protected lateinit var presenter: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injectDependencies()
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
         createPresenter(savedInstanceState)
@@ -23,6 +24,7 @@ abstract class BaseActivity<T : BasePresenter<*, *>> : AppCompatLifecycleActivit
         presenter.onSaveState(outState)
     }
 
+    open fun injectDependencies() { }
     protected abstract fun createPresenter(restoredBundle: Bundle?)
     protected abstract val layoutId: Int
 }
