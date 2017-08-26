@@ -8,29 +8,27 @@ import android.support.annotation.IdRes
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.View
-
+import butterknife.ButterKnife
 import com.shea.mvp.activity.BaseActivity
 import com.shea.mvp.presenter.BasePresenterInterface
-
-import butterknife.ButterKnife
 import kotlin.reflect.KProperty
 
 
 abstract class BaseView<T : BasePresenterInterface>(//Lock down this Activity so nobody does anything mischievous with it.
         open var activity: BaseActivity<*>?) {
 
-    protected var presenter: T? = null
+    protected var presenterInterface: T? = null
 
     fun destroy() {
         activity = null
     }
 
     fun attach(presenter: T) {
-        this.presenter = presenter
+        this.presenterInterface = presenter
     }
 
     fun detach() {
-        this.presenter = null
+        this.presenterInterface = null
     }
 
 
