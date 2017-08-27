@@ -1,9 +1,9 @@
 package com.shea.mvp.activity
 
 import android.os.Bundle
-import com.shea.mvp.presenter.BasePresenter
+import com.shea.mvp.presenter.BaseInterface
 
-abstract class BaseActivity<T : BasePresenter<*, *>> : AppCompatLifecycleActivity() {
+abstract class BaseActivity<T : BaseInterface.BasePresenterInterface> : AppCompatLifecycleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()

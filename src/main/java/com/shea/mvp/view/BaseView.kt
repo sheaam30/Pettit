@@ -10,16 +10,16 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import butterknife.ButterKnife
 import com.shea.mvp.activity.BaseActivity
-import com.shea.mvp.presenter.BasePresenterInterface
+import com.shea.mvp.presenter.BaseInterface
 import kotlin.reflect.KProperty
 
 
-abstract class BaseView<T : BasePresenterInterface>(//Lock down this Activity so nobody does anything mischievous with it.
-        open var activity: BaseActivity<*>?) {
+abstract class BaseView<T : BaseInterface.BasePresenterInterface>(//Lock down this Activity so nobody does anything mischievous with it.
+        open var activity: BaseActivity<*>?) : BaseInterface.BaseViewInterface {
 
     protected var presenterInterface: T? = null
 
-    fun destroy() {
+    override fun destroy() {
         activity = null
     }
 
@@ -31,21 +31,18 @@ abstract class BaseView<T : BasePresenterInterface>(//Lock down this Activity so
         this.presenterInterface = null
     }
 
-
     fun <T : View> bind(@IdRes res : Int) : T {
         @Suppress("UNCHECKED_CAST")
         return activity!!.bind(res)
     }
 
-
-    fun setupViews(savedInstanceState: Bundle?) {
+    override fun setupViews(bundle: Bundle?) {
         ButterKnife.bind(this, activity!!)
-        onSetupViews(savedInstanceState)
+        onSetupViews(bundle)
     }
 
     private fun viewNotFound(id:Int, desc: KProperty<*>): Nothing =
             throw IllegalStateException("View ID $id for '${desc.name}' not found.")
-
 
     protected fun setSupportActionbar(toolbar: Toolbar) {
         activity?.setSupportActionBar(toolbar)

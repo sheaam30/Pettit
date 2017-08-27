@@ -1,17 +1,14 @@
 package com.shea.mvp.presenter
 
 import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-
 import com.shea.mvp.interactor.BaseInteractor
-import com.shea.mvp.view.BaseView
 
 
-abstract class BasePresenter<I : BaseInteractor, V : BaseView<*>>(protected var interactor: I, protected var view: V) : LifecycleObserver {
+abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInterface>(protected var interactor: I, protected var view: V) : BaseInterface.BasePresenterInterface {
 
-    fun setupViews(savedInstanceState: Bundle?) {
+    override fun setupViews(savedInstanceState: Bundle?) {
         view.setupViews(savedInstanceState)
         onSetupViews(savedInstanceState)
     }
@@ -45,6 +42,6 @@ abstract class BasePresenter<I : BaseInteractor, V : BaseView<*>>(protected var 
     open fun onStop() {
     }
 
-    open fun onSaveState(outState: Bundle) { /* Override*/
+    override fun onSaveState(outState: Bundle) { /* Override*/
     }
 }
