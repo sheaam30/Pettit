@@ -10,15 +10,14 @@ import android.os.Bundle
 interface BaseInterface {
 
     interface BasePresenterInterface : LifecycleObserver {
-        fun setupViews(savedInstanceState: Bundle?) {
-        }
-
-        fun onSaveState(outState: Bundle) {
-        }
+        fun setupViews(savedInstanceState: Bundle?)
+        fun onSaveState(outState: Bundle)
     }
 
     interface BaseViewInterface {
-        open fun setupViews(bundle: Bundle?)
-        open fun destroy()
+        fun setupViews(bundle: Bundle?)
+        fun destroy()
+        fun attach(presenter: BasePresenterInterface)
+        fun detach()
     }
 }

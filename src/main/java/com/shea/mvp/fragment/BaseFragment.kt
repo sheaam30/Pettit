@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.shea.mvp.presenter.BasePresenter
+import com.shea.mvp.presenter.BaseInterface
 
-abstract class BaseFragment<T : BasePresenter<*, *>> :  LifecycleFragment() {
-
-    protected var presenter: T? = null
+abstract class BaseFragment<out T : BaseInterface.BasePresenterInterface> :  LifecycleFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(layoutId, container, false)
@@ -17,16 +15,15 @@ abstract class BaseFragment<T : BasePresenter<*, *>> :  LifecycleFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createPresenter(savedInstanceState)
-        presenter!!.setupViews(savedInstanceState!!)
+        getPresenter().setupViews(savedInstanceState)
+        lifecycle.addObserver(getPresenter())
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        presenter!!.onSaveState(outState)
+        getPresenter().onSaveState(outState)
     }
 
-    protected abstract fun createPresenter(restoredBundle: Bundle?)
+    protected abstract fun getPresenter() : T
     protected abstract val layoutId: Int
-
 }

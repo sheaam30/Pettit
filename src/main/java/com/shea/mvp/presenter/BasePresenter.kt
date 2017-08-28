@@ -36,10 +36,12 @@ abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInter
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     open fun onStart() {
+        view.attach(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     open fun onStop() {
+        view.detach()
     }
 
     override fun onSaveState(outState: Bundle) { /* Override*/

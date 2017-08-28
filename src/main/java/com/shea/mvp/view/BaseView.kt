@@ -13,8 +13,7 @@ import com.shea.mvp.activity.BaseActivity
 import com.shea.mvp.presenter.BaseInterface
 import kotlin.reflect.KProperty
 
-
-abstract class BaseView<T : BaseInterface.BasePresenterInterface>(//Lock down this Activity so nobody does anything mischievous with it.
+abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
         open var activity: BaseActivity<*>?) : BaseInterface.BaseViewInterface {
 
     protected var presenterInterface: T? = null
@@ -23,11 +22,11 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface>(//Lock down th
         activity = null
     }
 
-    fun attach(presenter: T) {
-        this.presenterInterface = presenter
+    override fun attach(presenter: BaseInterface.BasePresenterInterface) {
+        presenterInterface = presenter as? T
     }
 
-    fun detach() {
+    override fun detach() {
         this.presenterInterface = null
     }
 
