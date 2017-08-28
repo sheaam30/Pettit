@@ -65,6 +65,6 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
 
     fun <T : View> Activity.bind(@IdRes res : Int) : T {
         @Suppress("UNCHECKED_CAST")
-        return findViewById(res) as T
+        return findViewById(res)
     }
 }
