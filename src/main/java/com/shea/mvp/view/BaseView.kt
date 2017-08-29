@@ -1,10 +1,12 @@
 package com.shea.mvp.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.annotation.IdRes
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -57,6 +59,9 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
     protected val resources: Resources
         get() = activity!!.resources
 
+    protected val context: Context
+        get() = activity!!
+
     fun sendIntent(intent : Intent) {
         activity?.startActivity(intent)
     }
@@ -66,5 +71,9 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
     fun <T : View> Activity.bind(@IdRes res : Int) : T {
         @Suppress("UNCHECKED_CAST")
         return findViewById(res)
+    }
+
+    fun getFragmentManager() : FragmentManager {
+        return activity!!.supportFragmentManager
     }
 }
