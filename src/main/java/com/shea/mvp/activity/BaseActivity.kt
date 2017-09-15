@@ -1,9 +1,10 @@
 package com.shea.mvp.activity
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.shea.mvp.presenter.BaseInterface
 
-abstract class BaseActivity<out T : BaseInterface.BasePresenterInterface> : AppCompatLifecycleActivity() {
+abstract class BaseActivity<out T : BaseInterface.BasePresenterInterface> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
@@ -18,7 +19,8 @@ abstract class BaseActivity<out T : BaseInterface.BasePresenterInterface> : AppC
         getPresenter().onSaveState(outState)
     }
 
-    open fun injectDependencies() { }
+    // Override to inject with some DI
+    protected open fun injectDependencies() { }
     protected abstract fun getPresenter() : T
     protected abstract val layoutId: Int
 }

@@ -8,11 +8,19 @@ import com.shea.mvp.interactor.BaseInteractor
 
 abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInterface>(protected var interactor: I, protected var view: V) : BaseInterface.BasePresenterInterface {
 
+    /**
+     * Called by the BaseActivity to tell the Presentation layer
+     * to set itself up.
+     */
     override fun setupViews(savedInstanceState: Bundle?) {
         view.setupViews(savedInstanceState)
         onSetupViews(savedInstanceState)
     }
 
+    /**
+     * This method is called after the View's views are set up, meaning
+     * it's safe to reference them.
+     */
     open fun onSetupViews(savedInstanceState: Bundle?) { /*Override*/
     }
 
@@ -44,6 +52,9 @@ abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInter
         view.detach()
     }
 
+    /**
+     * Override this to save instance state
+     */
     override fun onSaveState(outState: Bundle) { /* Override*/
     }
 }

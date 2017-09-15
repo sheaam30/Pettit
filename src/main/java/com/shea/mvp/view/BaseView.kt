@@ -24,6 +24,7 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
         activity = null
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun attach(presenter: BaseInterface.BasePresenterInterface) {
         presenterInterface = presenter as? T
     }
