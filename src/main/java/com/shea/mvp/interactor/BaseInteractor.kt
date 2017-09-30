@@ -1,3 +1,4 @@
 package com.shea.mvp.interactor
 
-abstract class BaseInteractor
+abstract class BaseInteractor {
+}

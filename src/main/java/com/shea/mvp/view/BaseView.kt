@@ -74,7 +74,5 @@ abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
         return findViewById(res)
     }
 
-    fun getFragmentManager() : FragmentManager {
-        return activity!!.supportFragmentManager
-    }
+    fun getFragmentManager() : FragmentManager = activity!!.supportFragmentManager
 }
