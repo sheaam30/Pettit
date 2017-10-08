@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.shea.mvp.presenter.BaseInterface
 
-abstract class BaseActivity<out T : BaseInterface.BasePresenterInterface> : AppCompatActivity() {
+interface BaseActivity<out T : BaseInterface.BasePresenterInterface> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
-        getPresenter().setupViews(savedInstanceState)
         lifecycle.addObserver(getPresenter())
     }
 
@@ -20,7 +19,7 @@ abstract class BaseActivity<out T : BaseInterface.BasePresenterInterface> : AppC
     }
 
     // Override to inject with some DI
-    protected open fun injectDependencies() { }
-    protected abstract fun getPresenter() : T
-    protected abstract val layoutId: Int
+    fun injectDependencies() { }
+    fun getPresenter() : T
+    val layoutId: Int
 }

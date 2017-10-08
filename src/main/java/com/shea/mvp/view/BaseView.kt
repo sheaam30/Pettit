@@ -18,20 +18,14 @@ import kotlin.reflect.KProperty
 abstract class BaseView<T : BaseInterface.BasePresenterInterface> (
         open var activity: BaseActivity<*>?) : BaseInterface.BaseViewInterface {
 
-    protected var presenterInterface: T? = null
-
     override fun destroy() {
         activity = null
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun attach(presenter: BaseInterface.BasePresenterInterface) {
-        presenterInterface = presenter as? T
-    }
+    override fun attach(presenter: BaseInterface.BasePresenterInterface)
 
-    override fun detach() {
-        this.presenterInterface = null
-    }
+    override fun detach()
 
     fun <T : View> bind(@IdRes res : Int) : T {
         @Suppress("UNCHECKED_CAST")

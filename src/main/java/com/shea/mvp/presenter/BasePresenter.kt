@@ -3,20 +3,10 @@ package com.shea.mvp.presenter
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-import com.shea.mvp.interactor.BaseInteractor
+import com.shea.mvp.repository.BaseRepository
 
 
-abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInterface>(protected var interactor: I, protected var view: V) : BaseInterface.BasePresenterInterface {
-
-    /**
-     * Called by the BaseActivity to tell the Presentation layer
-     * to set itself up.
-     */
-    override fun setupViews(savedInstanceState: Bundle?) {
-        view.setupViews(savedInstanceState)
-        onSetupViews(savedInstanceState)
-    }
-
+abstract class BasePresenter<I : BaseRepository, V : BaseInterface.BaseViewInterface>(protected var interactor: I, protected var view: V) : BaseInterface.BasePresenterInterface {
     /**
      * This method is called after the View's views are set up, meaning
      * it's safe to reference them.
