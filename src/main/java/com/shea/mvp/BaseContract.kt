@@ -1,4 +1,4 @@
-package com.shea.mvp.presenter
+package com.shea.mvp
 
 import android.arch.lifecycle.LifecycleObserver
 import android.os.Bundle
@@ -7,17 +7,16 @@ import android.os.Bundle
  * Created by adamshea on 5/8/17.
  */
 
-interface BaseInterface {
+interface BaseContract {
 
-    interface BasePresenterInterface : LifecycleObserver {
+    interface Presenter : LifecycleObserver {
         fun setupViews(savedInstanceState: Bundle?)
         fun onSaveState(outState: Bundle)
     }
 
-    interface BaseViewInterface {
+    interface View {
         fun setupViews(bundle: Bundle?)
-        fun destroy()
-        fun attach(presenter: BasePresenterInterface)
-        fun detach()
     }
+
+    interface Repository { }
 }

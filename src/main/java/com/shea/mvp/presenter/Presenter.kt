@@ -3,10 +3,10 @@ package com.shea.mvp.presenter
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-import com.shea.mvp.interactor.BaseInteractor
+import com.shea.mvp.BaseContract
 
 
-abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInterface>(protected var interactor: I, protected var view: V) : BaseInterface.BasePresenterInterface {
+abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View>(protected var interactor: I, protected var view: V) : BaseContract.Presenter {
 
     /**
      * Called by the BaseActivity to tell the Presentation layer
@@ -35,7 +35,6 @@ abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInter
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onDestroy() {
-        view.destroy()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -43,14 +42,10 @@ abstract class BasePresenter<I : BaseInteractor, V : BaseInterface.BaseViewInter
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    open fun onStart() {
-        view.attach(this)
-    }
+    open fun onStart() { }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    open fun onStop() {
-        view.detach()
-    }
+    open fun onStop() { }
 
     /**
      * Override this to save instance state
