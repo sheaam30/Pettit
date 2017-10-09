@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.shea.mvp.BaseContract
 
 
-abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View>(protected var repository: I, protected var view: V) : BaseContract.Presenter {
+abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View<BaseContract.Presenter>>(private var repository: I, private var view: V) : BaseContract.Presenter {
 
     /**
      * Called by the BaseActivity to tell the Presentation layer
@@ -21,9 +21,7 @@ abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View>(pro
      * This method is called after the View's views are set up, meaning
      * it's safe to reference them.
      */
-    open fun onSetupViews(savedInstanceState: Bundle?) { /*Override*/
-    }
-
+    open fun onSetupViews(savedInstanceState: Bundle?) { /*Override*/ }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     open fun onResume() {
