@@ -13,7 +13,7 @@ import com.shea.mvp.BaseContract
 import dagger.android.support.DaggerFragment
 import kotlin.reflect.KProperty
 
-abstract class BaseFragment<out T : BaseContract.Presenter> :  DaggerFragment(), BaseContract.View {
+abstract class BaseFragment<out P : BaseContract.Presenter> :  DaggerFragment(), BaseContract.View<P> {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(layoutId, container, false)
@@ -40,23 +40,8 @@ abstract class BaseFragment<out T : BaseContract.Presenter> :  DaggerFragment(),
         onSetupViews(bundle)
     }
 
-    private fun viewNotFound(id:Int, desc: KProperty<*>): Nothing =
-            throw IllegalStateException("View ID $id for '${desc.name}' not found.")
-
-    abstract fun onSetupViews(savedInstanceState: Bundle?)
-
-    fun <T : View> Activity.bind(@IdRes res : Int) : T {
-        @Suppress("UNCHECKED_CAST")
-        return findViewById(res)
-    }
-
     fun <T : View> Fragment.bind(@IdRes res : Int) : T {
         @Suppress("UNCHECKED_CAST")
         return activity.findViewById(res)
     }
-
-    // Override to inject with some DI
-    protected open fun injectDependencies() { }
-    protected abstract fun getPresenter() : T
-    protected abstract val layoutId: Int
 }

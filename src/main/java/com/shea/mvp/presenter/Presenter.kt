@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.shea.mvp.BaseContract
 
 
-abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View>(protected var interactor: I, protected var view: V) : BaseContract.Presenter {
+abstract class Presenter<I : BaseContract.Repository, V : BaseContract.View>(protected var repository: I, protected var view: V) : BaseContract.Presenter {
 
     /**
      * Called by the BaseActivity to tell the Presentation layer

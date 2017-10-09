@@ -14,8 +14,14 @@ interface BaseContract {
         fun onSaveState(outState: Bundle)
     }
 
-    interface View {
+    interface View<out P : BaseContract.Presenter> {
         fun setupViews(bundle: Bundle?)
+        fun onSetupViews(savedInstanceState: Bundle?)
+
+        // Override to inject with some DI
+        fun injectDependencies() { }
+        fun getPresenter() : P
+        val layoutId: Int
     }
 
     interface Repository { }
