@@ -1,2 +1,11 @@
 # Pettit
-MVP Library to make spinning up new projects and prototyping quick and easy
+MVP Library
+
+## Presenter
+
+## View
+
+## Repository
+
+## Sample
+https://github.com/sheaam30/setlist
