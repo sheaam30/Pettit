@@ -1,7 +1,9 @@
 package com.shea.mvp
 
 import android.arch.lifecycle.LifecycleObserver
+import android.content.Intent
 import android.os.Bundle
+import java.io.File
 
 /**
  * Created by adamshea on 5/8/17.
